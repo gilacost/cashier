@@ -15,7 +15,7 @@ defmodule Checkout.Product do
 
   @products %{
     "GR1" => Checkout.Product.GreenTea,
-    "SR1" => Checkout.Product.Strawberris,
+    "SR1" => Checkout.Product.Strawberries,
     "CR1" => Checkout.Product.Coffe
   }
 
@@ -35,20 +35,17 @@ defmodule Checkout.Product do
     def new(), do: %Product{code: "GR1", name: "Green Tea", price: 3.11}
   end
 
-  defmodule Strawberris do
-    def new(), do: %Product{code: "SR1", name: "Strawberris", price: 5.0}
+  defmodule Strawberries do
+    def new(), do: %Product{code: "SR1", name: "Strawberries", price: 5.0}
   end
 
   defmodule Coffe do
-    def new(), do: %Product{code: "CR1", name: "Coffer", price: 11.23}
+    def new(), do: %Product{code: "CR1", name: "Coffe", price: 11.23}
   end
 end
 
 defmodule Checkout do
   alias Checkout.Product
-
-  @moduledoc """
-  """
 
   defstruct items: [], price_rules: %{}
 
