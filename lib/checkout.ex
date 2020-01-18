@@ -5,8 +5,8 @@ defmodule Checkout do
   defstruct items: %{}, price_rules: %{}
 
   @type t :: %__MODULE__{
-          items: list,
-          price_rules: list
+          items: map,
+          price_rules: map
         }
 
   @spec new(list) :: t
