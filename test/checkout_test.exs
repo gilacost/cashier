@@ -20,6 +20,18 @@ defmodule CheckoutTest do
                |> Checkout.new()
                |> Checkout.add_item(random_product)
     end
+
+    test "total return the sum of all the product prices in the checkout" do
+      {:ok, green_tea} = Product.new("GR1")
+      {:ok, coffe} = Product.new("CR1")
+
+      assert 14.34 ==
+               %{}
+               |> Checkout.new()
+               |> Checkout.add_item(coffe)
+               |> Checkout.add_item(green_tea)
+               |> Checkout.total()
+    end
   end
 
   describe "product" do
