@@ -21,4 +21,28 @@ defmodule Checkout do
       fn products -> [product | products] end
     )
   end
+
+  defmodule Product do
+    defstruct code: "", name: "", price: 0
+
+    @products %{
+      "GR1" => Checkout.Product.GreenTea
+    }
+
+    @type product_code :: String.t()
+
+    @spec new(product_code) :: {:ok, %Product{}}
+    def new(product_code) do
+      product =
+        @products
+        |> Map.get(product_code)
+        |> apply(:new, [])
+
+      {:ok, product}
+    end
+
+    defmodule GreenTea do
+      def new(), do: %Product{code: "GR1", name: "Green Tea", price: 3.11}
+    end
+  end
 end
