@@ -66,4 +66,9 @@ defmodule Checkout do
       &[product | &1]
     )
   end
+
+  @spec total(t) :: float
+  def total(%Checkout{items: items}) do
+    Enum.reduce(items, 0, &(&1.price + &2))
+  end
 end
