@@ -3,17 +3,23 @@ defmodule CheckoutTest do
   alias Checkout.Product
 
   @valid_product_codes ["GR1", "SR1", "CR1"]
+  @products %{
+    green_tea: Product.new("GR1") |> elem(1),
+    strawberries: Product.new("SR1") |> elem(1),
+    coffe: Product.new("CR1") |> elem(1)
+  }
 
   describe "checkout" do
+    setup do
+      {:ok, @products}
+    end
+
     test "new" do
       assert %Checkout{items: [], price_rules: %{}} = Checkout.new(%{})
     end
 
     test "adds a new product to the checkout items list" do
-      {:ok, random_product} =
-        @valid_product_codes
-        |> Enum.random()
-        |> Product.new()
+      {_key, random_product} = Enum.random(@products)
 
       assert %{items: [random_product]} =
                %{}
@@ -21,15 +27,60 @@ defmodule CheckoutTest do
                |> Checkout.add_item(random_product)
     end
 
-    test "total return the sum of all the product prices in the checkout" do
-      {:ok, green_tea} = Product.new("GR1")
-      {:ok, coffe} = Product.new("CR1")
-
+    test "total sums all item prices in the checkout",
+         %{coffe: coffe, green_tea: green_tea} do
       assert 14.34 ==
                %{}
                |> Checkout.new()
                |> Checkout.add_item(coffe)
                |> Checkout.add_item(green_tea)
+               |> Checkout.total()
+    end
+
+    test "Basket: GR1,SR1,GR1,GR1,CF1 expects total price £22.45",
+         %{coffe: coffe, strawberries: strawberries, green_tea: green_tea} do
+      assert 22.45 ==
+               %{}
+               |> Checkout.new()
+               |> Checkout.add_item(green_tea)
+               |> Checkout.add_item(strawberries)
+               |> Checkout.add_item(green_tea)
+               |> Checkout.add_item(green_tea)
+               |> Checkout.add_item(coffe)
+               |> Checkout.total()
+    end
+
+    test "Basket: GR1,GR1 expects total price £3.11", %{green_tea: green_tea} do
+      assert 3.11 ==
+               %{}
+               |> Checkout.new()
+               |> Checkout.add_item(green_tea)
+               |> Checkout.add_item(green_tea)
+               |> Checkout.total()
+    end
+
+    test "Basket: SR1,SR1,GR1,SR1 expects total price £16.61",
+         %{strawberries: strawberries, green_tea: green_tea} do
+      assert 16.61 ==
+               %{}
+               |> Checkout.new()
+               |> Checkout.add_item(strawberries)
+               |> Checkout.add_item(strawberries)
+               |> Checkout.add_item(green_tea)
+               |> Checkout.add_item(strawberries)
+               |> Checkout.total()
+    end
+
+    test "Basket: GR1,CF1,SR1,CF1,CF1 expects total price £30.57",
+         %{coffe: coffe, strawberries: strawberries, green_tea: green_tea} do
+      assert 30.57 ==
+               %{}
+               |> Checkout.new()
+               |> Checkout.add_item(green_tea)
+               |> Checkout.add_item(coffe)
+               |> Checkout.add_item(strawberries)
+               |> Checkout.add_item(coffe)
+               |> Checkout.add_item(coffe)
                |> Checkout.total()
     end
   end
@@ -40,8 +91,6 @@ defmodule CheckoutTest do
     end
 
     test "valid products" do
-      # TODO get them from env?
-      # TODO setup all
       Enum.each(@valid_product_codes, fn code ->
         assert {:ok, %Product{}} = Product.new(code)
       end)
