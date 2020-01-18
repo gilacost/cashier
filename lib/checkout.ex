@@ -7,6 +7,12 @@ defmodule Checkout.Product do
   #
   defstruct code: "", name: "", price: 0
 
+  @type t :: %__MODULE__{
+          code: String.t(),
+          name: String.t(),
+          price: float()
+        }
+
   @products %{
     "GR1" => Checkout.Product.GreenTea,
     "SR1" => Checkout.Product.Strawberris,
@@ -47,7 +53,7 @@ defmodule Checkout do
   defstruct items: [], price_rules: %{}
 
   @type t :: %__MODULE__{
-          items: map,
+          items: list,
           price_rules: map
         }
 

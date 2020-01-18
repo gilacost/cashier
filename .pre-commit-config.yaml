@@ -11,7 +11,13 @@ repos:
 -   repo: local
     hooks:
     -   id: mix-test
-        name: 'elixir: mixing tests'
+        name: 'elixir: mix dialyzer'
+        entry: mix dialyzer
+        language: system
+        files: \.ex$
+
+    -   id: mix-test
+        name: 'elixir: mix tests'
         entry: mix test
         language: system
         files: \.exs$
