@@ -1,10 +1,6 @@
 defmodule Checkout.Product do
   alias __MODULE__
-  # TODO not found exception
-  # TODO invert dependency
-  # TODO callbacks for product
-  # TODO default discount rule
-  #
+
   defstruct code: "", name: "", price: 0
 
   @type t :: %__MODULE__{
@@ -45,9 +41,9 @@ defmodule Checkout.Product do
 end
 
 defmodule Checkout do
-  alias Checkout.Product
+  alias Checkout.{Product, Discount}
 
-  defstruct items: [], price_rules: %{}
+  defstruct items: [], price_rules: %{}, discount: 0
 
   @type t :: %__MODULE__{
           items: list,
@@ -59,16 +55,53 @@ defmodule Checkout do
 
   @spec add_item(t, Product.t()) :: t()
   def add_item(checkout, %Product{} = product) do
-    Map.update(
-      checkout,
-      :items,
-      [product],
-      &[product | &1]
-    )
+    checkout =
+      %{checkout | discount: 0}
+      |> Map.update(
+        :items,
+        [product],
+        &[product | &1]
+      )
+
+    checkout
+    |> Discount.get_one_free(product_count(checkout, "GR1"))
+    |> Discount.bulk("SR1", product_count(checkout, "SR1"))
+    |> Discount.bulk("CR1", product_count(checkout, "CR1"))
   end
 
+  @spec product_count(%Checkout{}, String.t()) :: integer
+  defp product_count(%Checkout{items: items}, code),
+    do: Enum.count(items, &(&1.code == code))
+
   @spec total(t) :: float
-  def total(%Checkout{items: items}) do
-    Enum.reduce(items, 0, &(&1.price + &2))
+  def total(%Checkout{items: items, discount: discount}) do
+    Enum.reduce(items, 0, &(&1.price + &2)) - discount
   end
+end
+
+defmodule Checkout.Discount do
+  alias Checkout
+  alias Checkout.Product.{GreenTea, Coffe}
+
+  @spec get_one_free(%Checkout{}, integer) :: %Checkout{}
+  def get_one_free(%Checkout{} = checkout, count) when count > 1 do
+    discount = floor(count / 2) * GreenTea.new().price
+
+    Map.update(checkout, :discount, 0, &(&1 + discount))
+  end
+
+  def get_one_free(%Checkout{} = checkout, _count), do: checkout
+
+  @spec bulk(%Checkout{}, String.t(), integer) :: %Checkout{}
+  def bulk(%Checkout{} = checkout, code, count) when count > 2 do
+    discount =
+      case code do
+        "SR1" -> count * 0.5
+        "CR1" -> count * Coffe.new().price * 1 / 3
+      end
+
+    Map.update(checkout, :discount, 0, &(&1 + discount))
+  end
+
+  def bulk(%Checkout{} = checkout, _code, _count), do: checkout
 end
