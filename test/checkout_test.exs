@@ -3,7 +3,11 @@ defmodule CheckoutTest do
 
   describe "checkout" do
     test "new" do
-      assert %{items: [], price_rules: []} = Checkout.new([])
+      assert %Checkout{items: [], price_rules: []} = Checkout.new([])
+    end
+
+    test "adds a new product to the checkout items list" do
+      assert %{items: [%Product{}]}
     end
   end
 end
