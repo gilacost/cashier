@@ -1,5 +1,6 @@
 defmodule CheckoutTest do
   use ExUnit.Case
+  alias Checkout.Product
 
   describe "checkout" do
     test "new" do
@@ -7,7 +8,16 @@ defmodule CheckoutTest do
     end
 
     test "adds a new product to the checkout items list" do
-      assert %{items: [%Product{}]}
+      assert %{items: ["item"]} =
+               []
+               |> Checkout.new()
+               |> Checkout.add_item("item")
+    end
+  end
+
+  describe "product" do
+    test "new has code, name and price" do
+      assert {:ok, %Product{code: _, name: _, price: _}} = Product.new("GR1")
     end
   end
 end
