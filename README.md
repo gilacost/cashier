@@ -1,4 +1,5 @@
-![](https://github.com/gilacost/kantox/workflows/.github/workflows/pre-commit.yml/badge.svg)
+
+![](https://github.com/gilacost/kantox/workflows/.github/workflows/elixir.yml/badge.svg)
 
 # Cashier  🛒
 
