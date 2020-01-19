@@ -1,9 +1,9 @@
-defmodule Checkout.MixProject do
+defmodule Cashier.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :checkout,
+      app: :cashier,
       version: "0.1.0",
       elixir: "~> 1.9",
       elixirc_options: [warnings_as_errors: true],

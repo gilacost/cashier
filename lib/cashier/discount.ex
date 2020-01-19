@@ -2,8 +2,8 @@ defprotocol Discount do
   def apply(type, params)
 end
 
-defmodule Checkout.Discount do
-  alias Checkout.Product
+defmodule Cashier.Discount do
+  alias Cashier.Product
 
   defmodule OneFor do
     defstruct type: :one

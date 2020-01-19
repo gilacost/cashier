@@ -1,5 +1,5 @@
-defmodule Checkout do
-  alias Checkout.Product
+defmodule Cashier do
+  alias Cashier.Product
 
   defstruct items: [], price_rules: %{}, discount: 0
 
@@ -9,7 +9,7 @@ defmodule Checkout do
         }
 
   @spec new(list) :: t
-  def new(price_rules), do: %Checkout{price_rules: price_rules}
+  def new(price_rules), do: %Cashier{price_rules: price_rules}
 
   @spec add_item(t, Product.t()) :: t()
   def add_item(checkout, %Product{} = product) do
@@ -22,11 +22,11 @@ defmodule Checkout do
     |> apply_discounts()
   end
 
-  @spec product_count(%Checkout{}, String.t()) :: integer
-  defp product_count(%Checkout{items: items}, code),
+  @spec product_count(%Cashier{}, String.t()) :: integer
+  defp product_count(%Cashier{items: items}, code),
     do: Enum.count(items, &(&1.code == code))
 
-  defp apply_discounts(%Checkout{price_rules: price_rules} = checkout) do
+  defp apply_discounts(%Cashier{price_rules: price_rules} = checkout) do
     checkout = %{checkout | discount: 0}
 
     Enum.reduce(price_rules, checkout, fn {code, discount}, checkout ->
@@ -36,7 +36,7 @@ defmodule Checkout do
   end
 
   @spec total(t) :: float
-  def total(%Checkout{items: items, discount: discount}) do
+  def total(%Cashier{items: items, discount: discount}) do
     Enum.reduce(items, 0, &(&1.price + &2)) - discount
   end
 end

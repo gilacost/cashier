@@ -1,4 +1,4 @@
-defmodule Checkout.Product do
+defmodule Cashier.Product do
   alias __MODULE__
   defstruct code: "", name: "", price: 0
 
