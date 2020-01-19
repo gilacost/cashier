@@ -9,6 +9,13 @@ defmodule Cashier.MixProject do
       elixirc_options: [warnings_as_errors: true],
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
       dialyzer: [plt_add_deps: :apps_direct],
       docs: [
         # The main page in the docs
@@ -28,7 +35,8 @@ defmodule Cashier.MixProject do
   defp deps do
     [
       {:dialyxir, "~> 1.0.0-rc.7", only: [:dev], runtime: false},
-      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 end
