@@ -2,7 +2,7 @@ defmodule Cashier do
   @moduledoc """
   A set of functions for interact with the cart.
   It can be instantiated with and empty map or receive a map containing price
-  rules mapped to product codes. The price rules need to implement the `Discount`
+  rules mapped to product codes. The price rules need to implement the `Discountable`
   protocol. For more information go to `Discount.apply/2`
 
   ## Default cashier 🛒🏃💨
@@ -118,7 +118,6 @@ defmodule Cashier do
   end
 
   # Counts the number of items of a certain type in the checkout.
-
   defp product_count(%Cashier{items: items}, code),
     do: Enum.count(items, &(&1.code == code))
 
@@ -129,7 +128,7 @@ defmodule Cashier do
 
     Enum.reduce(pricing_rules, checkout, fn {code, discount}, checkout ->
       count = product_count(checkout, code)
-      Discount.apply(discount, [count, code, checkout])
+      Discountable.apply(discount, [count, code, checkout])
     end)
   end
 end

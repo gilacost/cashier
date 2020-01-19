@@ -1,7 +1,8 @@
 
-![](https://github.com/gilacost/kantox/workflows/Elixir%20CI/badge.svg)
 
 # Cashier  🛒
+
+Main module `Cashier`.
 
 This is a minimal elixir application that implements the Kantox technical test
 requirements:
@@ -12,6 +13,8 @@ requirements:
 * I used a github private repository, I wanted to keep this process low
  profile, I hope you understand.
 * I did not use a DB.
+
+![](https://github.com/gilacost/kantox/workflows/Elixir%20CI/badge.svg)
 
 ## Installation  🚀
 
