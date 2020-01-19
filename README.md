@@ -1,6 +1,6 @@
 ![](https://github.com/gilacost/kantox/workflows/.github/workflows/pre-commit.yml/badge.svg)
 
-# Cashier 🛒
+# Cashier  🛒
 
 This is a minimal elixir application that implements the Kantox technical test
 requirements:
@@ -12,7 +12,7 @@ requirements:
  profile, I hope you understand.
 * I did not use a DB.
 
-## Installation 🚀
+## Installation  🚀
 
 So that the teams local environments can be as similar as possible and all of
 the same versions of each package are used, I have used [asdf](https://github.com/asdf-vm/asdf). If you don't have it already installed you can just run `make asdf`
@@ -44,7 +44,7 @@ echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.bashrc
 If you use zsh, you  should add it to your `.zshrc` file.
 
 
-### Hooks ⚓️
+### Hooks  ⚓️
 
 To ensure a fast and secure development and to avoid mistakes, using hooks is
 encouraged. If you want to do so, you can install them by running `make hooks`.
