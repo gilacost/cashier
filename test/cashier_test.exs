@@ -1,5 +1,7 @@
 defmodule CashierTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
+  doctest Cashier
+
   alias Cashier.Product
   alias Cashier.Discount.OneFor
   alias Cashier.Discount.Bulk
@@ -24,7 +26,7 @@ defmodule CashierTest do
     end
 
     test "new" do
-      assert %Cashier{items: [], price_rules: %{}} = Cashier.new(%{})
+      assert %Cashier{items: [], pricing_rules: %{}} = Cashier.new(%{})
     end
 
     test "adds a new product to the checkout items list" do
@@ -33,7 +35,7 @@ defmodule CashierTest do
       assert %{items: [random_product]} =
                %{}
                |> Cashier.new()
-               |> Cashier.add_item(random_product)
+               |> Cashier.scan(random_product)
     end
 
     test "total sums all item prices in the checkout",
@@ -41,8 +43,8 @@ defmodule CashierTest do
       assert 14.34 ==
                %{}
                |> Cashier.new()
-               |> Cashier.add_item(coffe)
-               |> Cashier.add_item(green_tea)
+               |> Cashier.scan(coffe)
+               |> Cashier.scan(green_tea)
                |> Cashier.total()
     end
 
@@ -51,11 +53,11 @@ defmodule CashierTest do
       assert 22.45 ==
                @default_rules
                |> Cashier.new()
-               |> Cashier.add_item(green_tea)
-               |> Cashier.add_item(strawberries)
-               |> Cashier.add_item(green_tea)
-               |> Cashier.add_item(green_tea)
-               |> Cashier.add_item(coffe)
+               |> Cashier.scan(green_tea)
+               |> Cashier.scan(strawberries)
+               |> Cashier.scan(green_tea)
+               |> Cashier.scan(green_tea)
+               |> Cashier.scan(coffe)
                |> Cashier.total()
     end
 
@@ -63,8 +65,8 @@ defmodule CashierTest do
       assert 3.11 ==
                @default_rules
                |> Cashier.new()
-               |> Cashier.add_item(green_tea)
-               |> Cashier.add_item(green_tea)
+               |> Cashier.scan(green_tea)
+               |> Cashier.scan(green_tea)
                |> Cashier.total()
     end
 
@@ -73,10 +75,10 @@ defmodule CashierTest do
       assert 16.61 ==
                @default_rules
                |> Cashier.new()
-               |> Cashier.add_item(strawberries)
-               |> Cashier.add_item(strawberries)
-               |> Cashier.add_item(green_tea)
-               |> Cashier.add_item(strawberries)
+               |> Cashier.scan(strawberries)
+               |> Cashier.scan(strawberries)
+               |> Cashier.scan(green_tea)
+               |> Cashier.scan(strawberries)
                |> Cashier.total()
     end
 
@@ -85,11 +87,11 @@ defmodule CashierTest do
       assert 30.57 ==
                @default_rules
                |> Cashier.new()
-               |> Cashier.add_item(green_tea)
-               |> Cashier.add_item(coffe)
-               |> Cashier.add_item(strawberries)
-               |> Cashier.add_item(coffe)
-               |> Cashier.add_item(coffe)
+               |> Cashier.scan(green_tea)
+               |> Cashier.scan(coffe)
+               |> Cashier.scan(strawberries)
+               |> Cashier.scan(coffe)
+               |> Cashier.scan(coffe)
                |> Cashier.total()
     end
   end
