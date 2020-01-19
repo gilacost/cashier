@@ -20,4 +20,4 @@ jobs:
     - name: Run Tests
       run: mix test
     - name: Run Dialyzer
-      run: mix dializer
+      run: mix dialyzer
