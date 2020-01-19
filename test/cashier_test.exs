@@ -1,6 +1,8 @@
 defmodule CashierTest do
   use ExUnit.Case, async: true
   doctest Cashier
+  doctest Cashier.Product
+  doctest Discountable
 
   alias Cashier.Product
   alias Cashier.Discount.OneFor

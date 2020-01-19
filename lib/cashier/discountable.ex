@@ -41,9 +41,23 @@ end
 
 defmodule Cashier.Discount do
   @moduledoc """
-  The repository of the different discounts and its implementations.
+  The repository of the different discounts and their implementations.
 
+  ## Examples
+
+        iex> %Cashier.Discount.OneFor{}
+        %Cashier.Discount.OneFor{type: :one}
+
+        iex> %Cashier.Discount.Bulk.Fixed{}
+        %Cashier.Discount.Bulk.Fixed{amount: 0.5, from: 3}
+
+        iex> %Cashier.Discount.Bulk.Percentage{}
+        %Cashier.Discount.Bulk.Percentage{
+          fraction: 0.3333333333333333,
+          from: 3
+        }
   """
+
   alias Cashier.Product
 
   defmodule OneFor do
@@ -51,9 +65,9 @@ defmodule Cashier.Discount do
     Discount also called buy one get one for free.
 
     The way this has been implemented is a bit tricky. It always divides the
-    number of items by 2 and then floors and then 2/2 is 1 and 3/2 is also 1.
+    number of items by 2 and then floors the result.
 
-    This might not be easy to extend for the time being.
+    Then `2/2` is 1 and `3/2` is also 1.
     """
 
     @typedoc """
@@ -75,16 +89,14 @@ defmodule Cashier.Discount do
 
   defmodule Bulk.Fixed do
     @moduledoc """
-    Fixed discount applied to all products of type.
+    Fixed discount applied to all products of certain type.
 
-    It subtracts a fixed amount from the price of a certain product, the product
-    price is not needed in this case. The condition of for this discount to be
-    applied will be determined by the `t[:from]`.
+    It subtracts a fixed amount from the price of a product. The condition for
+    this discount to be applied will be determined by the `:from`.
 
     For example we have a `%Bulk.Fixed{from: 3, amount: 0.5}`. This will reduce
     the price of the product 0.5 if we have 3 or more products of that type in
     the items list.
-
     """
 
     @typedoc """
