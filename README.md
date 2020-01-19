@@ -45,9 +45,17 @@ echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.bashrc
 If you use zsh, you  should add it to your `.zshrc` file.
 
 
-### Hooks  ⚓️
+## Hooks  ⚓️
 
 To ensure a fast and secure development and to avoid mistakes, using hooks is
 encouraged. If you want to do so, you can install them by running `make hooks`.
 This will install [pre-commit](https://pre-commit.com/), which is a python
 package; so you will need to have python already installed.
+
+## Documentation  🗃
+
+[Ex doc](https://github.com/elixir-lang/ex_doc) has been added as a depenency in order to generate documentation for the
+codebase. If you fancy review the different modules and their function run
+`make docs`.
+
+## Continuous Integration  🔁
