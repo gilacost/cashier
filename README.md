@@ -1,5 +1,6 @@
 
 ![](https://github.com/gilacost/kantox/workflows/.github/workflows/elixir.yml/badge.svg)
+![](https://github.com/gilacost/kantox/Elixir%20CI/badge.svg)
 
 # Cashier  🛒
 
