@@ -1,36 +1,37 @@
 name: Elixir CI
 
 on: push
-
+on: push
 jobs:
   build:
-
+    name: Elixir ${{matrix.elixir}} / OTP ${{matrix.otp}}
+    strategy:
+      matrix:
+        otp: [22.x]
+        elixir: [1.9.x]
     runs-on: ubuntu-latest
-
-    container:
-      image: elixir:1.9.1-slim
-
-    env:
-      MIX_ENV: test
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v1.0.0
 
-    - name: Install Dependencies
-      run: |
-        mix local.rebar --force
-        mix local.hex --force
-        mix deps.get
+      - uses: actions/setup-elixir@v1.0.0
+        with:
+          otp-version: ${{matrix.otp}}
+          elixir-version: ${{matrix.elixir}}
 
-    - name: Run Format
-      run: mix format --check-formatted
+      - name: Install Dependencies
+        run: |
+          mix local.rebar --force
+          mix local.hex --force
+          mix deps.get
 
-    - name: Run Tests
-      run: mix test
+      - name: Check Formatting
+        run: mix format --check-formatted
 
-    # - name: Run Dialyzer
-    #   run: mix dialyzer
+      - name: Run Tests
+        run: mix test
 
-    - name: Run Coveralls
-      run: mix coveralls.github
+      - name: Check Typespec
+        run: mix dialyzer --halt-exit-status
+
+      - name: Run Coveralls
+        run: mix coveralls.github
