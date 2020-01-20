@@ -1,7 +1,6 @@
 name: Elixir CI
 
 on: push
-on: push
 jobs:
   build:
     name: Elixir ${{matrix.elixir}} / OTP ${{matrix.otp}}

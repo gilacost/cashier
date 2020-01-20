@@ -60,5 +60,22 @@ different modules and their function run `make docs`.
 
 ## Continuous Integration&nbsp;🔁
 
-One github action has been set up. ![Elixir CI](https://github.com/actions/setup-elixir).
-![Cashier Coveralls](https://coveralls.io/github/gilacost/cashier).
+[Elixir CI](https://github.com/actions/setup-elixir) github action has been
+set up. It runs the next tasks.
+
+```yaml
+- name: Check Formatting
+  run: mix format --check-formatted
+
+- name: Run Tests
+  run: mix test
+
+- name: Check Typespec
+  run: mix dialyzer --halt-exit-status
+
+- name: Run Coveralls
+  run: mix coveralls.github
+```
+Here is the action [yaml](/.github/workflows/elixir.yml).
+
+* Code coverage has also been set up with [coveralls](https://coveralls.io/github/gilacost/cashier).
