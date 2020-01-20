@@ -34,7 +34,7 @@ defmodule Cashier.MixProject do
 
   defp deps do
     [
-      {:dialyxir, "~> 1.0.0-rc.7", only: [:dev], runtime: false},
+      {:dialyxir, "~> 1.0.0-rc.7", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:excoveralls, "~> 0.10", only: :test}
     ]
