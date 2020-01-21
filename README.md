@@ -12,7 +12,8 @@ requirements:
  profile, I hope you understand.
 * I did not use a DB.
 
-![Elixi CI status](https://github.com/gilacost/kantox/workflows/Elixir%20CI/badge.svg)&nbsp;[![Coverage Status](https://coveralls.io/repos/github/gilacost/cashier/badge.svg?branch=master&t=3Anqcg)](https://coveralls.io/github/gilacost/cashier?branch=master)
+![Elixi CI status](https://github.com/gilacost/kantox/workflows/Elixir%20CI/badge.svg)&nbsp;&nbsp;[![Coverage Status](https://coveralls.io/repos/github/gilacost/cashier/badge.svg?branch=master&t=3Anqcg)](https://coveralls.io/github/gilacost/cashier?branch=master)&nbsp;&nbsp;![Deploy status](https://github.com/gilacost/cashier/workflows/Push%20to%20ECR%20and%20Deploy%20to%20ECS/badge.svg)
+
 ## Installation&nbsp;🚀
 
 So that the teams local environments can be as similar as possible and all of

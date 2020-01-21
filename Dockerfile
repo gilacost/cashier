@@ -16,3 +16,5 @@ RUN mix deps.get && \
 # Default stage
 FROM httpd:2.4
 COPY --from=builder /cashier/doc /usr/local/apache2/htdocs/
+
+CMD [ "httpd-foreground" ]
