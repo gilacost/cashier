@@ -58,13 +58,13 @@ package; so you will need to have python already installed.
 ## Documentation &nbsp;🗃
 
 [Ex doc](https://github.com/elixir-lang/ex_doc) has been added as a depenency in
-order to generate documentation for the codebase. If you fancy review the
+order to generate documentation for the codebase. If you fancy reviewing the
 different modules and their function run `make docs`.
 
 ## Continuous Integration &nbsp;🔁
 
 [Elixir CI](https://github.com/actions/setup-elixir) github action has been
-set up. It runs the next tasks.
+set up. It runs the following tasks.
 
 ```
 - name: Check Formatting

@@ -1,9 +1,9 @@
 defmodule Cashier do
   @moduledoc """
-  A set of functions for interact with the cart.
-  It can be instantiated with and empty map or receive a map containing price
+  A set of functions for interacting with the cart.
+  It can be instantiated with an empty map or receive a map containing price
   rules mapped to product codes. The price rules need to implement the `Discountable`
-  protocol. For more information go to `Discount.apply/2`
+  protocol. For more information go to Discount.apply/2.
 
   ## Default cashier 🛒🏃💨
 

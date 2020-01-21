@@ -3,12 +3,11 @@ defmodule Cashier.Product do
   Provides a set of functions to work with products.
 
   The product list is defined within this module. All products have the same
-  attributes, if they had other particularities, they should had been shaped
+  attributes, if they had other particularities, they should have been shaped
   into their own data structure.
 
-  A product needs to have code, a name and a
-  price. The product instantiation requires that its definition exists already
-  in `@products` map.
+  A product needs to have a code, a name and a price. The product instantiation
+  requires that definition already exists in `@products` map.
 
   ## Products
 

@@ -19,19 +19,22 @@ defprotocol Discountable do
   applied. It will contain different parameters depending on the behaviour:
 
     * `:type`     - it can be OneFor `:one` for now.
-    * `:amount`   - the fixed amount that will be subtracted to product price.
-    * `:from`     - bulk discounts, from which product count should discount.
+    * `:amount`   - the fixed amount that will be subtracted from product price.
+    * `:from`     - bulk discounts, from which product count discount should
+    start being applied.
   start being applied.
-    * `:fraction` - the fraction that will be applied to product price.
+    * `:fraction` - the fraction that will be applied to the product price.
   """
   @type discount :: struct
 
   @typedoc """
-  Params is a list that will contain:
+  A product count a product code and the checkout instance in a list:
 
-    * `:count`    - the number of items in the checkout of certain product code.
+    * `:count`    - the number of items in the checkout of a certain product
+    code.
     * `:code`     - product code that will be used to query the product price.
-    * `:checkout` - the container of items, pricing rules and the value to discount.
+    * `:checkout` - the container of items, pricing rules and the value to
+    discount.
   """
   @type params() :: [any]
 
@@ -62,7 +65,7 @@ defmodule Cashier.Discount do
 
   defmodule OneFor do
     @moduledoc """
-    Discount also called buy one get one for free.
+    Discount also called buy one get one free.
 
     The way this has been implemented is a bit tricky. It always divides the
     number of items by 2 and then floors the result.
@@ -71,8 +74,7 @@ defmodule Cashier.Discount do
     """
 
     @typedoc """
-    Type is an atom that decides if the discount will be one for `:one` or
-    another one not yet implemented.
+    Type is an atom that decides if the discount will be one for `:one`.
     """
 
     @type t :: %__MODULE__{type: atom}
@@ -89,7 +91,7 @@ defmodule Cashier.Discount do
 
   defmodule Bulk.Fixed do
     @moduledoc """
-    Fixed discount applied to all products of certain type.
+    Fixed discount applied to all products of a certain type.
 
     It subtracts a fixed amount from the price of a product. The condition for
     this discount to be applied will be determined by the `:from`.
@@ -100,8 +102,8 @@ defmodule Cashier.Discount do
     """
 
     @typedoc """
-    * `:from`    - minimum number of products of type for the discount to be
-    applied.
+    * `:from`    - minimum number of products of the same type for the discount
+    to be applied.
     * `:amount`  - fixed amount to be subtracted from the product price.
     """
 
@@ -128,7 +130,7 @@ defmodule Cashier.Discount do
     """
 
     @typedoc """
-    * `:fraction` - fraction to be multiplied the product price.
+    * `:fraction` - fraction to be multiplied by the product price.
     """
 
     @type t :: %__MODULE__{from: atom, fraction: float}
