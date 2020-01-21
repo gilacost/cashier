@@ -23,18 +23,25 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: cashier-docs
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: latest
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
-      - name: Deploy to Amazon ECS
+      - name: Render Amazon ECS task definition
+        id: render-web-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: web
+          image: amazon/amazon-ecs-sample:latest
+
+      - name: Deploy to Amazon ECS service
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: terraform/task-definitions/service.json
+          task-definition: ${{ steps.render-web-container.outputs.task-definition }}
           service: ecs-docs
           cluster: sense-eight
-          wait-for-service-stability: true
 
       - name: Logout of Amazon ECR
         if: always()
