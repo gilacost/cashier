@@ -1,6 +1,6 @@
 [
   {
-    "name": "docs-app",
+    "name": "ecs-docs",
     "image": "${ecr_img}",
     "portMappings": [
       {

@@ -82,7 +82,7 @@ data "template_file" "user_data" {
 }
 
 resource "aws_ecs_task_definition" "docs_task" {
-  family                   = "cashier-docs"
+  family                   = "ecs-docs"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   execution_role_arn       = data.aws_iam_role.ecs_task_execution.arn
@@ -115,4 +115,7 @@ output "access" {
   ${interface.association[0].public_dns_name}
 %{~endfor}
 EOF
+}
+output "container_definition" {
+  value = aws_ecs_task_definition.docs_task
 }
