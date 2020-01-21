@@ -1,7 +1,7 @@
 [
   {
     "name": "docs-app",
-    "image": "${registry_url}",
+    "image": "${ecr_img}",
     "portMappings": [
       {
         "containerPort": 80,
