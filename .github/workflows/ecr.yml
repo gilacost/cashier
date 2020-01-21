@@ -31,7 +31,7 @@ jobs:
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: terraform/task_definition/service.json
+          task-definition: terraform/task-definitions/service.json
           service: ecs-docs
           cluster: sense-eight
           wait-for-service-stability: true
