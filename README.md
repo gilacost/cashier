@@ -147,10 +147,6 @@ you need to specify the resource target because the registry has been declared
 with `prevent_destroy` as you can see here:
 
 ```
-  image_scanning_configuration {
-    scan_on_push = true
-  }
-
   lifecycle {
     prevent_destroy = true
   }
@@ -162,9 +158,6 @@ Asdf plugin for terraform should be already installed from previous `make instal
 ```
   terraform init
 ```
-
-The registry has been also created with `scan_on_push`. This will deploy
-automatically the last image pushed to the registry.
 
 ```
   terraform destroy -target=aws_ecs_cluster.sense_eight
