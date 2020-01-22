@@ -121,12 +121,7 @@
         "timeout": 0,
         "retries": 0,
         "startPeriod": 0
-      },
-      "resourceRequirements": [
-        {
-          "type": "InferenceAccelerator"
-        }
-      ]
+      }
     }
   ],
   "requiresCompatibilities": ["FARGATE"],
