@@ -19,6 +19,15 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: cashier-docs
+          IMAGE_TAG: latest
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
       - name: Render Amazon ECS task definition
         id: render-web-container
         uses: aws-actions/amazon-ecs-render-task-definition@v1
@@ -33,15 +42,6 @@ jobs:
           task-definition: ${{ steps.render-web-container.outputs.task-definition }}
           service: ecs-docs
           cluster: sense-eight
-
-      # - name: Build, tag, and push image to Amazon ECR
-      #   env:
-      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     ECR_REPOSITORY: cashier-docs
-      #     IMAGE_TAG: latest
-      #   run: |
-      #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-      #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
       - name: Logout of Amazon ECR
         if: always()
