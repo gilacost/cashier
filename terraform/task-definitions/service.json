@@ -122,53 +122,11 @@
         "retries": 0,
         "startPeriod": 0
       },
-      "systemControls": [
-        {
-          "namespace": "",
-          "value": ""
-        }
-      ],
       "resourceRequirements": [
         {
-          "value": "",
           "type": "InferenceAccelerator"
         }
-      ],
-      "firelensConfiguration": {
-        "type": "fluentd",
-        "options": {
-          "KeyName": ""
-        }
-      }
-    }
-  ],
-  "volumes": [
-    {
-      "name": "",
-      "host": {
-        "sourcePath": ""
-      },
-      "dockerVolumeConfiguration": {
-        "scope": "shared",
-        "autoprovision": true,
-        "driver": "",
-        "driverOpts": {
-          "KeyName": ""
-        },
-        "labels": {
-          "KeyName": ""
-        }
-      },
-      "efsVolumeConfiguration": {
-        "fileSystemId": "",
-        "rootDirectory": ""
-      }
-    }
-  ],
-  "placementConstraints": [
-    {
-      "type": "memberOf",
-      "expression": ""
+      ]
     }
   ],
   "requiresCompatibilities": ["FARGATE"],
@@ -176,26 +134,10 @@
   "memory": "",
   "tags": [
     {
-      "key": "",
-      "value": ""
+      "key": "project",
+      "value": "kantox"
     }
   ],
   "pidMode": "task",
-  "ipcMode": "host",
-  "proxyConfiguration": {
-    "type": "APPMESH",
-    "containerName": "",
-    "properties": [
-      {
-        "name": "",
-        "value": ""
-      }
-    ]
-  },
-  "inferenceAccelerators": [
-    {
-      "deviceName": "",
-      "deviceType": ""
-    }
-  ]
+  "ipcMode": "host"
 }
