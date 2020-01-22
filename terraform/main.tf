@@ -75,7 +75,7 @@ resource "aws_ecs_cluster" "sense_eight" {
 }
 
 data "template_file" "user_data" {
-  template = file("task-definitions/service.json")
+  template = file("task-definitions/fresh_service.json")
   vars = {
     ecr_img = aws_ecr_repository.img_repo.repository_url
   }

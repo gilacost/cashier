@@ -28,20 +28,20 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
-      # - name: Render Amazon ECS task definition
-      #   id: render-web-container
-      #   uses: aws-actions/amazon-ecs-render-task-definition@v1
-      #   with:
-      #     task-definition: terraform/task-definitions/service.json
-      #     container-name: ecs-docs
-      #     image: cashier-docs:latest
+      - name: Render Amazon ECS task definition
+        id: render-web-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: terraform/task-definitions/service.json
+          container-name: ecs-docs
+          image: cashier-docs:latest
 
-      # - name: Deploy to Amazon ECS service
-      #   uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-      #   with:
-      #     task-definition: ${{ steps.render-web-container.outputs.task-definition }}
-      #     service: ecs-docs
-      #     cluster: sense-eight
+      - name: Deploy to Amazon ECS service
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-web-container.outputs.task-definition }}
+          service: ecs-docs
+          cluster: sense-eight
 
       - name: Logout of Amazon ECR
         if: always()
