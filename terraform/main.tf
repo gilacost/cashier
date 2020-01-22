@@ -62,7 +62,7 @@ data "aws_iam_role" "ecs_task_execution" {
 
 #ECR and ECS
 resource "aws_ecr_repository" "img_repo" {
-  name                 = "cashier-docs"
+  name                 = "ecs-docs"
   image_tag_mutability = "MUTABLE"
 
   lifecycle {

@@ -1,14 +1,9 @@
 {
-  "family": "ecs-docs",
-  "taskRoleArn": "",
-  "executionRoleArn": "executionRoleArn",
-  "networkMode": "awsvpc",
   "containerDefinitions": [
     {
       "name": "ecs-docs",
       "image": "901533923326.dkr.ecr.eu-west-3.amazonaws.com/cashier-docs",
-      "cpu": 256,
-      "memory": 512,
+      "cpu": 0,
       "portMappings": [
         {
           "containerPort": 80,
@@ -17,40 +12,17 @@
         }
       ],
       "essential": true,
-      "entryPoint": [""],
-      "command": [""],
-      "startTimeout": 15,
-      "stopTimeout": 10,
-      "privileged": false,
-      "readonlyRootFilesystem": true,
-      "interactive": true,
-      "pseudoTerminal": true,
-      "dockerLabels": {
-        "KeyName": ""
-      },
-      "ulimits": [
-        {
-          "name": "cpu",
-          "softLimit": 0,
-          "hardLimit": 0
-        }
-      ],
-      "healthCheck": {
-        "command": ["ls"],
-        "interval": 30,
-        "timeout": 60,
-        "retries": 3,
-        "startPeriod": 60
-      }
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": []
     }
   ],
+  "family": "ecs-docs",
+  "executionRoleArn": "arn:aws:iam::901533923326:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "placementConstraints": [],
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "256",
-  "memory": "512",
-  "tags": [
-    {
-      "key": "project",
-      "value": "kantox"
-    }
-  ]
+  "memory": "512"
 }

@@ -1,4 +1,5 @@
-
+[
+  {
     "name": "ecs-docs",
     "image": "${ecr_img}",
     "portMappings": [
@@ -10,3 +11,4 @@
     ],
     "essential": true
   }
+]

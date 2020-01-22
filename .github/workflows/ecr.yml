@@ -22,11 +22,11 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: cashier-docs
-          IMAGE_TAG: latest
+          ECR_REPOSITORY: ecs-docs
+          IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Render Amazon ECS task definition
         id: render-web-container
@@ -34,7 +34,7 @@ jobs:
         with:
           task-definition: terraform/task-definitions/service.json
           container-name: ecs-docs
-          image: cashier-docs:latest
+          image: ecs-docs:${{ github.sha }}
 
       - name: Deploy to Amazon ECS service
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
