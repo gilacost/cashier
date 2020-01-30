@@ -2,17 +2,9 @@
 
 Main module `Cashier`.
 
-This is a minimal elixir application that implements the Kantox technical test
-requirements:
+This is a minimal elixir application that implements a shopping kart.
 
-* I used elixir instead of ruby, I hope this is okay.
-* I used TDD in all of the implementation process, you can navigate through the
- commit history, you might laugh at some summaries.
-* I used a github private repository, I wanted to keep this process low
- profile, I hope you understand.
-* I did not use a DB.
-
- [![Coverage Status](https://coveralls.io/repos/github/gilacost/cashier/badge.svg?branch=master&t=3Anqcg)](https://coveralls.io/github/gilacost/cashier?branch=master)&nbsp;&nbsp;![Elixi CI status](https://github.com/gilacost/kantox/workflows/Elixir%20CI/badge.svg)&nbsp;&nbsp;![Deploy status](https://github.com/gilacost/cashier/workflows/Push%20to%20ECR%20and%20Deploy%20to%20ECS/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/gilacost/cashier/badge.svg?branch=master&t=3Anqcg)](https://coveralls.io/github/gilacost/cashier?branch=master)&nbsp;&nbsp;![Deploy status](https://github.com/gilacost/cashier/workflows/Push%20to%20ECR%20and%20Deploy%20to%20ECS/badge.svg)&nbsp;&nbsp;![Elixir CI status](https://github.com/gilacost/cashier/workflows/Elixir%20CI/badge.svg)
 
 ## Installation &nbsp;🚀
 

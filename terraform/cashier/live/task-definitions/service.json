@@ -2,8 +2,7 @@
   "containerDefinitions": [
     {
       "name": "ecs-docs",
-      "image": "901533923326.dkr.ecr.eu-west-3.amazonaws.com/cashier-docs",
-      "cpu": 0,
+      "image": "901533923326.dkr.ecr.eu-west-3.amazonaws.com/ecs-docs:latest",
       "portMappings": [
         {
           "containerPort": 80,
